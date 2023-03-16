@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('quiz_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('quiz_id');
+            $table->integer('quiz_id');
             $table->string('title');
             $table->integer('number');
             $table->timestamps();
