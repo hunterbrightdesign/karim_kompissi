@@ -57,23 +57,30 @@ class UserQuizResponceController extends HelpController
      */
     public function UserQuizResponc(Request $request)
     {
-        $validateUser = Validator::make(
-            $request->all(), [
-              'quiz_id' => 'required|exists:quizzes,id',
-              'user_id' => 'required|exists:users,id',
-            ]
-          );
-        if ($validateUser->fails()) {
-        return $this->sendError('Vlidation error: '. $validateUser->errors(), 401);
-        }
-        $Quiz = Quiz::find($request['quiz_id']);
-        $Questions = $Quiz->getQuestion()->get();
-        $res = $Questions->map(function($question, $key) use($request) {
-            $question['userReponce'] = $question->getUserResponce()->where('user_id',$request['user_id'])->get();
-            return $question;
-        });
-        return $this->sendResponse($res, 'user Quiz responce list successfully.');
         try {
+            $validateUser = Validator::make(
+                $request->all(), [
+                  'quiz_id' => 'required|exists:quizzes,id',
+                  'user_id' => 'required|exists:users,id',
+                ]
+              );
+
+            if ($validateUser->fails()) {
+            return $this->sendError('Vlidation error: '. $validateUser->errors(), 401);
+            }
+
+            $Quiz = Quiz::find($request['quiz_id']);
+            $Questions = $Quiz->getQuestion()->get();
+
+            $res = $Questions->map(function($question, $key) use($request) {
+                $UserResponce = $question->getUserResponce()->where('user_id',$request['user_id'])->first();
+                $question['userReponce'] = $UserResponce;
+                if($UserResponce)
+                    $question['responceValide'] = $UserResponce->getResponceUser()->first()->status === 1 ? true : false;
+                return $question;
+            });
+
+            return $this->sendResponse($res, 'user Quiz responce list successfully.');
 
         } catch (\Throwable $th) {
             report($th);

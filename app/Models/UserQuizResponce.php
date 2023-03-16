@@ -15,4 +15,7 @@ class UserQuizResponce extends Model
         'created_at',
         'updated_at',
       ];
+    public function getResponceUser() {
+        return $this->belongsTo(QuestionResponce::class,'question_responces_id');
+    }
 }
