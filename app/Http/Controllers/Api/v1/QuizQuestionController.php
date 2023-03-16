@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Quiz_question;
+use App\Models\QuizQuestion;
 use App\Http\Controllers\Api\v1\HelpController;
 use App\Http\Requests\QuizQuestionRequests;
 use Illuminate\Support\Facades\Auth;
@@ -18,17 +18,14 @@ class QuizQuestionController extends HelpController
      */
     public function index()
     {
-        //
-    }
+        try {
+            $QuizQuestion = QuizQuestion::all();
+            return $this->sendResponse($QuizQuestion, 'Quiz question list successfully.');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        } catch (\Throwable $th) {
+            report($th);
+            return $this->sendError('Unable to insert this/these item(s)', $th, 403);
+        }
     }
 
     /**
@@ -37,9 +34,17 @@ class QuizQuestionController extends HelpController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuizQuestionRequests $request)
     {
-        //
+        try {
+            $data = $request->validated();
+            $QuizQuestion = QuizQuestion::create($data);
+            return $this->sendResponse($QuizQuestion, 'Quiz question create successfully.');
+
+        } catch (\Throwable $th) {
+            report($th);
+            return $this->sendError('Unable to insert this/these item(s)', $th, 403);
+        }
     }
 
     /**
@@ -50,18 +55,14 @@ class QuizQuestionController extends HelpController
      */
     public function show($id)
     {
-        //
-    }
+        try {
+            $QuizQuestion = QuizQuestion::find($id);
+            return $this->sendResponse($QuizQuestion, 'Quiz question list successfully.');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        } catch (\Throwable $th) {
+            report($th);
+            return $this->sendError('Unable to insert this/these item(s)', $th, 403);
+        }
     }
 
     /**
@@ -71,9 +72,18 @@ class QuizQuestionController extends HelpController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuizQuestionRequests $request, $id)
     {
-        //
+        try {
+            $data = $request->validated();
+            $QuizQuestion = QuizQuestion::find($id);
+            $QuizQuestion->update($data);
+            return $this->sendResponse($QuizQuestion, 'Quiz question update successfully.');
+
+        } catch (\Throwable $th) {
+            report($th);
+            return $this->sendError('Unable to update this/these item(s)', $th, 403);
+        }
     }
 
     /**
@@ -84,6 +94,14 @@ class QuizQuestionController extends HelpController
      */
     public function destroy($id)
     {
-        //
+        try {
+            $QuizQuestion = QuizQuestion::find($id);
+            $QuizQuestion->delete();
+            return $this->sendResponse($QuizQuestion, 'Quiz question delete successfully.');
+
+        } catch (\Throwable $th) {
+            report($th);
+            return $this->sendError('Unable to delete this/these item(s)', $th, 403);
+        }
     }
 }

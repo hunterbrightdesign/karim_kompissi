@@ -22,7 +22,7 @@ class QuizQuestionRequests extends FormRequest {
   public function rules() {
     return [
         // 'user_id' => 'required|integer',
-        'quiz_id' => 'int|required',
+        'quiz_id' => 'int|required|exists:quizzes,id',
         'title' => 'string|required',
         'number' => 'int|required',
     ];
