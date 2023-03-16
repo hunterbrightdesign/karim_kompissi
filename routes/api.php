@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\v1\QuizController;
 use App\Http\Controllers\Api\v1\QuizQuestionController;
+use App\Http\Controllers\Api\v1\QuestionResponcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,5 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::apiResource('/quiz', QuizController::class)->except(['create', 'edit'])->middleware('auth:sanctum');
 Route::apiResource('/quiz-question', QuizQuestionController::class)->except(['create', 'edit'])->middleware('auth:sanctum');
+Route::apiResource('/question-responces', QuestionResponcesController::class)->except(['create', 'edit'])->middleware('auth:sanctum');
 
