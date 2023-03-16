@@ -74,9 +74,11 @@ class UserQuizResponceController extends HelpController
 
             $res = $Questions->map(function($question, $key) use($request) {
                 $UserResponce = $question->getUserResponce()->where('user_id',$request['user_id'])->first();
-                $question['userReponce'] = $UserResponce;
                 if($UserResponce)
-                    $question['responceValide'] = $UserResponce->getResponceUser()->first()->status === 1 ? true : false;
+                    $question['userReponce'] = [
+                        'valeur' => $UserResponce->getResponceUser()->first()->responce,
+                        'isValide' => $UserResponce->getResponceUser()->first()->status === 1 ? true : false
+                    ];
                 return $question;
             });
 
