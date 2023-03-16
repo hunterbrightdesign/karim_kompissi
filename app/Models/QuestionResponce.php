@@ -15,4 +15,7 @@ class QuestionResponce extends Model
         'created_at',
         'updated_at',
       ];
+      public function getQuestion() {
+        return $this->belongsToMany(QuizQuestion::class,'question_id');
+      }
 }

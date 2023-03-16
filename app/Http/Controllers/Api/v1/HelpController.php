@@ -48,4 +48,14 @@ class HelpController extends Controller
 
         return response()->json($response, $code);
     }
+
+    /**
+     * return bool response.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkUsercreatedQuiz(int $Quiz_id)
+    {
+    }
+
 }
