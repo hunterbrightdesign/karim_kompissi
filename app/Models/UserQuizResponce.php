@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Quiz extends Model
+class UserQuizResponce extends Model
 {
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'title',
-        'desc',
+        'quiz_questions_id',
+        'question_responces_id',
         'created_at',
         'updated_at',
       ];
-      public function getQuestion() {
-        return $this->hasMany(QuizQuestion::class);
-      }
+    public function getResponceUser() {
+        return $this->belongsTo(QuestionResponce::class,'question_responces_id');
+    }
 }
