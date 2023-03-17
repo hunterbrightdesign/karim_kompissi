@@ -57,6 +57,12 @@ class QuizController extends HelpController
     {
         try {
             $quiz = Quiz::find($id);
+            $questions = $quiz->getQuestion()->get();
+            $questionResponce = $questions->map(function ($question , $key){
+                $question['responce'] = $question->getResponce()->get();
+                return $question;
+            });
+            $quiz['question'] = $questionResponce;
             return $this->sendResponse($quiz, 'Quiz create successfully.');
         } catch (\Throwable $th) {
             report($th);

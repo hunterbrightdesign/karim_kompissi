@@ -16,7 +16,7 @@ class QuizQuestion extends Model
         'updated_at',
       ];
       public function getResponce() {
-        return $this->hasMany(QuestionResponce::class);
+        return $this->hasMany(QuestionResponce::class,'id');
       }
       public function getUserResponce() {
         return $this->hasMany(UserQuizResponce::class,'quiz_questions_id');
