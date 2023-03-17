@@ -103,6 +103,8 @@ class UserQuizResponceController extends HelpController
             $data = $request->validated();
             $data['user_id'] = Auth::user()->id;
             $UserQuizResponce = UserQuizResponce::find($id);
+            if($UserQuizResponce->user_id != Auth::user()->id)
+                return $this->sendError('you didn\'t have the authorization', $th, 403);
             $UserQuizResponce->update($data);
             return $this->sendResponse($UserQuizResponce, 'Quiz responce update successfully.');
 
@@ -122,6 +124,8 @@ class UserQuizResponceController extends HelpController
     {
         try {
             $UserQuizResponce = UserQuizResponce::find($id);
+            if($UserQuizResponce->user_id != Auth::user()->id)
+                return $this->sendError('you didn\'t have the authorization', $th, 403);
             $UserQuizResponce->delete();
             return $this->sendResponse($UserQuizResponce, 'Quiz responce delete successfully.');
 

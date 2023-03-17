@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Auth;
 class QuestionResponcesController extends HelpController
 {
     /**
+   * Controller General Constructor
+   *
+   * @author Fokoui Marco <hunterbrightdesign@gmail.com>
+   * @return void
+   */
+  public function __construct() {
+    $this->middleware('CheckIsCreate:questionResponce')->except('index', 'show');
+  }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

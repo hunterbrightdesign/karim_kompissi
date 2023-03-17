@@ -12,8 +12,18 @@ use Illuminate\Support\Facades\Auth;
 class QuizController extends HelpController
 {
     /**
+   * Controller General Constructor
+   *
+   * @author Fokoui Marco <hunterbrightdesign@gmail.com>
+   * @return void
+   */
+  public function __construct() {
+    $this->middleware('CheckIsCreate:quiz')->except('index', 'show', 'store');
+  }
+
+    /**
      * Display a listing of the resource.
-     *
+    * @author Fokoui Marco <hunterbrightdesign@gmail.com>
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -28,7 +38,7 @@ class QuizController extends HelpController
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @author Fokoui Marco <hunterbrightdesign@gmail.com>
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -49,7 +59,7 @@ class QuizController extends HelpController
 
     /**
      * Display the specified resource.
-     *
+     * @author Fokoui Marco <hunterbrightdesign@gmail.com>
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -72,7 +82,7 @@ class QuizController extends HelpController
 
     /**
      * Update the specified resource in storage.
-     *
+     * @author Fokoui Marco <hunterbrightdesign@gmail.com>
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -95,7 +105,7 @@ class QuizController extends HelpController
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @author Fokoui Marco <hunterbrightdesign@gmail.com>
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
