@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\LikesController;
-use App\Http\Controllers\VideoController;
+use App\Http\Controllers\Api\v1\PostController;
+use App\Http\Controllers\Api\v1\LikesController;
+use App\Http\Controllers\Api\v1\VideoController;
 
 /*
 |--------------------------------------------------------------------------

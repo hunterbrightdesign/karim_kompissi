@@ -42,6 +42,7 @@ class LikesController extends HelpController
                 'data'    => $th,
                 'message' => "Unable to insert this/these item(s)",
             ];
+             return response()->json($response, 403);
         }
     }
 

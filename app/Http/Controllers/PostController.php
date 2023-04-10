@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequests;
-use App\Model\Post;
+use App\Model\Posts;
 use Intervention\Image\Facades\Image as Image;
 use App\Http\Controllers\HelpController;
 
@@ -47,12 +47,18 @@ class PostController extends HelpController
                     Image::make($img)->save($location);
                 } catch (\Throwable $e) {
                     report($e);
-                    return $this->sendErrorWithData('Unable to handle image uploading', $e, 500);
+                    $response = [
+                        'statusText' => 'success',
+                        'data'    => $th,
+                        'message' => "Unable to insert this/these item(s)",
+                    ];
+
+                    return response()->json($response, 403);
                 }
             }
 
 
-            $post = Post::create($data);
+            $post = Posts::create($data);
             $response = [
                 'statusText' => 'success',
                 'data'    => $post,

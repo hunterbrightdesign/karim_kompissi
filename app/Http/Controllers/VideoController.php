@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\VideoRequests;
-use App\Model\Video;
+use App\Model\Videos;
 use App\Http\Controllers\HelpController;
 
 class VideoController extends HelpController
@@ -32,7 +32,7 @@ class VideoController extends HelpController
     {
          try {
             $data = $request->validated();
-            $video = Video::create($data);
+            $video = Videos::create($data);
             return $this.sendResponse($video, 'Video create successfully.');
         } catch (\Throwable $th) {
             report($th);
