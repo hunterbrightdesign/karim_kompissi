@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuizRequests extends FormRequest {
+class VideoRequests extends FormRequest {
   /**
    * Determine if the user is authorized to make this request.
    *
@@ -23,6 +23,7 @@ class QuizRequests extends FormRequest {
     return [
         'title' => 'string|required|max:191',
         'desc' => 'string|required|max:191',
+        'link' => 'string|required|unique:Video|max:191',
     ];
   }
 
