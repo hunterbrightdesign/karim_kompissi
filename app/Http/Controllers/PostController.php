@@ -15,7 +15,14 @@ class PostController extends HelpController
      */
     public function index()
     {
-        //
+        $data = Posts::all();
+        $response = [
+            'statusText' => 'success',
+            'data'    => $data,
+            'message' => "Unable to insert this/these item(s)",
+        ];
+
+        return response()->json($response, 403);
     }
 
     /**
