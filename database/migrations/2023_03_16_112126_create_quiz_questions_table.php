@@ -8,22 +8,27 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('quiz_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('decs');
-            $table->string('link')->unique();
+            $table->integer('quiz_id');
+            $table->string('title');
+            $table->integer('number');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('quiz_questions');
     }
 };

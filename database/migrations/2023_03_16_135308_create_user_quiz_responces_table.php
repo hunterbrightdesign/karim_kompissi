@@ -8,23 +8,27 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('user_quiz_responces', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('model_type');
-            $table->integer('model_id');
+            $table->integer('quiz_questions_id');
+            $table->integer('question_responces_id');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('user_quiz_responces');
     }
 };
