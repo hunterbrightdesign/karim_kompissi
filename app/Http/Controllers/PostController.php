@@ -31,9 +31,8 @@ class PostController extends HelpController
      */
     public function store(PostRequests $request)
     {
-        // try {
+        try {
             $data = $request->validated();
-            return $this.sendResponse($data, 'Post create successfully.');
             $lowerTitel = strtolower($data['titel']);
             $slug = str_replace(' ','_',$lowerTitel);
             $data['slug'] = $slug;
@@ -54,11 +53,24 @@ class PostController extends HelpController
 
 
             $post = Post::create($data);
-            return $this.sendResponse($post, 'Post create successfully.');
-        // } catch (\Throwable $th) {
-        //     report($th);
-        //     return $this->sendError('Unable to insert this/these item(s)', $th, 403);
-        // }
+            $response = [
+                'statusText' => 'success',
+                'data'    => $post,
+                'message' => "Post create successfully.",
+            ];
+
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            report($th);
+            $response = [
+                'statusText' => 'success',
+                'data'    => $th,
+                'message' => "Unable to insert this/these item(s)",
+            ];
+
+            return response()->json($response, 403);
+        }
     }
 
     /**
